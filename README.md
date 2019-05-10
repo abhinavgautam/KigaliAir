@@ -1,2 +1,2 @@
 # KigaliAir
-Garage48 Kigali 2019 Hackathin
+Garage48 Kigali 2019 Hackathon
