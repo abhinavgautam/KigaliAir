@@ -13,6 +13,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
 </head>
 <body>
 <div class="container">
@@ -56,6 +57,8 @@
         <p>
             <a class="btn btn-sm btn-primary" href="#" role="button">About Us &raquo;</a>
         </p>
+        <h5> Air Quality Index (AQI)</h5>
+        <div class="ct-chart" width="200" height="200"></div>
         <p>
             <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/778383/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
             <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/778383/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
@@ -70,11 +73,83 @@
         </p>
     </div>
 </div> <!-- /container -->
+<!--<canvas id="myChart" width="200" height="200"></canvas>-->
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
+<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+<script>
+    new Chartist.Pie('.ct-chart', {
+    series: [20, 80]
+}, {
+    donut: true,
+    donutWidth: 20,
+    donutSolid: true,
+    startAngle: 270,
+    total: 200,
+    showLabel: true
+});
+</script>
+<!--<script>-->
+    <!--var ctx = document.getElementById('myChart').getContext('2d');-->
+    <!--data = [{ x: new Date(),  y: 1 }, { t: new Date(),  y: 10 }];-->
+    <!--var myChart = new Chart(ctx, {-->
+        <!--type: 'bar',-->
+        <!--data: {-->
+            <!--labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],-->
+            <!--datasets: [{-->
+                <!--label: '# of Votes',-->
+                <!--data: [12, 19, 3, 5, 2, 3],-->
+                <!--backgroundColor: [-->
+                    <!--'rgba(255, 99, 132, 0.2)',-->
+                    <!--'rgba(54, 162, 235, 0.2)',-->
+                    <!--'rgba(255, 206, 86, 0.2)',-->
+                    <!--'rgba(75, 192, 192, 0.2)',-->
+                    <!--'rgba(153, 102, 255, 0.2)',-->
+                    <!--'rgba(255, 159, 64, 0.2)'-->
+                <!--],-->
+                <!--borderColor: [-->
+                    <!--'rgba(255, 99, 132, 1)',-->
+                    <!--'rgba(54, 162, 235, 1)',-->
+                    <!--'rgba(255, 206, 86, 1)',-->
+                    <!--'rgba(75, 192, 192, 1)',-->
+                    <!--'rgba(153, 102, 255, 1)',-->
+                    <!--'rgba(255, 159, 64, 1)'-->
+                <!--],-->
+                <!--borderWidth: 1-->
+            <!--}]-->
+        <!--},-->
+        <!--options: {-->
+            <!--scales: {-->
+                <!--yAxes: [{-->
+                    <!--ticks: {-->
+                        <!--beginAtZero: true-->
+                    <!--}-->
+                <!--}]-->
+            <!--}-->
+        <!--}-->
+    <!--});-->
+    <!--var chart = new Chart(ctx, {-->
+        <!--type: 'line',-->
+        <!--data: data,-->
+        <!--options: {-->
+            <!--scales: {-->
+                <!--xAxes: [{-->
+                    <!--type: 'time',-->
+                    <!--time: {-->
+                        <!--displayFormats: {-->
+                            <!--quarter: 'MMM YYYY'-->
+                        <!--}-->
+                    <!--}-->
+                <!--}]-->
+            <!--}-->
+        <!--}-->
+    <!--});-->
+<!--</script>-->
 </body>
 </html>
