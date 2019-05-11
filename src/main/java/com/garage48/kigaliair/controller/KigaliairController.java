@@ -19,7 +19,7 @@ public class KigaliairController {
     @RequestMapping("/")
     public String index(Model model){
         model.addAttribute("datetime", new Date());
-        model.addAttribute("username", "murenzi");
+        model.addAttribute("projectName", "KigaliAir");
         model.addAttribute("mode", appMode);
 
         return "index";
