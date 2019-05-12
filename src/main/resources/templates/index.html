@@ -30,7 +30,7 @@
         document.getElementById("CO2").innerText = obj.channel.field4;
         document.getElementById("createdAt").innerText = obj.channel.created_at;
         document.getElementById("updatedAt").innerText = obj.channel.updated_at;
-    </script-->>
+    </script-->
     <link rel="stylesheet" href="../templates/css/valuenumber.css">
 </head>
 <body>
@@ -84,29 +84,29 @@
           <div class="card-footer">
             <div class="row text-center">
               <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                <div class="text-muted">AQI (RWANDA)</div>
-                <strong th:text="${aqi}"></strong>
+                <div class="text-muted">Air Quality Index(AQI -RW)</div>
+                <strong id="aqi-text"></strong>
                 <div class="progress progress-xs mt-2">
                   <div class="progress-bar bg-success" role="progressbar" style="width: 40%" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div>
               <div class="col-sm-12 col-md mb-sm-2 mb-0">
                 <div class="text-muted">Temperature reading</div>
-                <strong th:text="${temp} + '°C'"></strong>
+                <strong id="temp-text"></strong>
                 <div class="progress progress-xs mt-2">
                   <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div>
               <div class="col-sm-12 col-md mb-sm-2 mb-0">
                 <div class="text-muted">Current Humidity</div>
-                <strong th:text="${humidity} + '%'"></strong>
+                <strong id="humidity-text"></strong>
                 <div class="progress progress-xs mt-2">
                   <div class="progress-bar bg-success" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div>
               <div class="col-sm-12 col-md mb-sm-2 mb-0">
                 <div class="text-muted">Carbondioxide</div>
-                <strong th:text="${CO2} + ' μg/m³'"></strong>
+                <strong id="co2-text"></strong>
                 <div class="progress progress-xs mt-2">
                   <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="260" aria-valuemin="0" aria-valuemax="500"></div>
                 </div>
@@ -138,10 +138,46 @@
 <script src="../static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="../static/js/custom.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
 <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
-    <!--<script>
+<script>
+    let aqi = 0;
+    let temp = 0;
+    let humidity = 0;
+    let co2 = 0;
 
+    fetch('https://api.thingspeak.com/channels/778383/fields/1.json?results=1')
+        .then(data  => data.json())
+        .then(data => {
+            aqi = data.feeds[0].field1
+            const aqiElement = document.getElementById('aqi-text');
+            aqiElement.innerText = aqi;
+        })
+    fetch('https://api.thingspeak.com/channels/778383/fields/2.json?results=1')
+        .then(data  => data.json())
+    .then(data => {
+        temp = data.feeds[0].field2
+        const tempElement = document.getElementById('temp-text');
+        tempElement.innerText = temp + '°C';
+    })
+    fetch('https://api.thingspeak.com/channels/778383/fields/3.json?results=1')
+        .then(data  => data.json())
+    .then(data => {
+        humidity = data.feeds[0].field3
+        const humidityElement = document.getElementById('humidity-text');
+    humidityElement.innerText = humidity + '%';
+    })
+    fetch('https://api.thingspeak.com/channels/778383/fields/4.json?results=1')
+        .then(data  => data.json())
+    .then(data => {
+        co2 = data.feeds[0].field4
+        const co2Element = document.getElementById('co2-text');
+        co2Element.innerText = co2 + ' μg/m³';
+    })
+</script>
+    <!--<script>
+ 
         let createAt = [];
         let field1 = [];
         fetch('https://api.thingspeak.com/channels/778383/fields/1.json?results=20')
