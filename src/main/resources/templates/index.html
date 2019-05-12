@@ -40,7 +40,7 @@
         <!--Usage of models we wrote in WepAppController th:text="'Welcome to basic Bootstrap with Spring Boot created by ' + ${username} -->
         <p th:text="'Time:  ' + ${#dates.format(datetime, 'dd MMM yyyy HH:mm')}"></p>
         <h5 th:text="'Realtime Pollution Monitor, powered by ' + ${projectName}"></h5>
-        <p> <h1><strong>What's in your AIR? </strong></h1></p>
+        <p> <h1><strong>What's in your AIR? [bit.ly/KigaliAir]</strong></h1></p>
 
         <!--<div class="aqi">
             <div class="graph-title">
@@ -89,7 +89,7 @@
                 </div>
               </div>
               <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                <div class="text-muted">Carbondioxide</div>
+                  <div class="text-muted">Carbondioxide</div>
                 <strong id="co2-text"></strong>
                 <div class="progress progress-xs mt-2">
                   <div class="progress-bar bg-info" role="progressbar" style="width: 35%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
@@ -110,7 +110,7 @@
         </p>
         <p>
             <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/778383/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Humidity&type=line&yaxis=Humidity+%28%25%29"></iframe>
-            <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/778383/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Carbon+Dioxide&type=line&yaxis=Particles+%28ug%2Fm3%29"></iframe>
+            <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/778383/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Carbon+Dioxide&type=line&yaxis=Particles+%28μg%2Fm³%   29"></iframe>
         </p>
     </div>
 </div>
