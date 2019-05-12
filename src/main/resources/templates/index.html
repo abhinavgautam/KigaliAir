@@ -13,11 +13,8 @@
 
     <!-- Bootstrap core CSS -->
     <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
-<<<<<<< Updated upstream
-=======
     <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
     <link rel="stylesheet" href="../templates/css/valuenumber.css">
->>>>>>> Stashed changes
 </head>
 <body>
 <div class="container">
@@ -64,22 +61,13 @@
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
         <!--Usage of models we wrote in WepAppController th:text="'Welcome to basic Bootstrap with Spring Boot created by ' + ${username} -->
-<<<<<<< Updated upstream
-        <h3 th:text="'Welcome to basic Bootstrap with Spring Boot created by ' + ${username}"></h3>
-        <p th:text="'This date example  ' + ${#dates.format(datetime, 'dd MMM yyyy HH:mm')}"></p>
-        <p> is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work.
-            It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-=======
         <h3 th:text="'Realtime Pollution Monitor, powered by ' + ${projectName}"></h3>
         <p th:text="'Time:  ' + ${#dates.format(datetime, 'dd MMM yyyy HH:mm')}"></p>
         <p> <strong><h2>Monitoring Kigali Air Pollution Patterns to improve air quality, health and utilize Pollution data
         in decision making and interventions</strong></h2></p>
->>>>>>> Stashed changes
         <p>
             <a class="btn btn-lg btn-primary" href="#" role="button">View navbar docs &raquo;</a>
         </p>
-<<<<<<< Updated upstream
-=======
         <h5> Air Quality Index (AQI)</h5>
 
 
@@ -171,7 +159,6 @@
 
 
         <div class="ct-chart" width="200" height="200"></div>
->>>>>>> Stashed changes
         <p>
             <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/778383/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
         </p>
@@ -181,6 +168,7 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="../../../../src/js/range.js"></script>
 <script src="../static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 </body>
