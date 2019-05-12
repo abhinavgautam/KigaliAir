@@ -15,7 +15,7 @@
     <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
     <!-- Added Scripts -->
-    <script>
+   <!-- <script>
         var Http = new XMLHttpRequest();
         var url = "https://api.thingspeak.com/channels/778383/fields/1.json?results=2";
         Http.open("GET", url);
@@ -28,66 +28,175 @@
         document.getElementById("temp").innerText = obj.channel.field2;
         document.getElementById("humidity").innerText = obj.channel.field3;
         document.getElementById("CO2").innerText = obj.channel.field4;
-        document.getElementById("PM25").innerText = obj.channel.field5;
         document.getElementById("createdAt").innerText = obj.channel.created_at;
         document.getElementById("updatedAt").innerText = obj.channel.updated_at;
-    </script>
+    </script-->>
+    <link rel="stylesheet" href="../templates/css/valuenumber.css">
 </head>
 <body>
 <div class="container">
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
         <!--Usage of models we wrote in WepAppController th:text="'Welcome to basic Bootstrap with Spring Boot created by ' + ${username} -->
-        <h3 th:text="'Realtime Pollution Monitor, powered by ' + ${projectName}"></h3>
         <p th:text="'Time:  ' + ${#dates.format(datetime, 'dd MMM yyyy HH:mm')}"></p>
-        <p> Monitoring Kigali Air Pollution Patterns to improve air quality, health and utilize Pollution data
-        in decision making and interventions</p>
+        <h5 th:text="'Realtime Pollution Monitor, powered by ' + ${projectName}"></h5>
+        <p> <h1><strong>What's in your AIR? </strong></h1></p>
+
+        <!--<div class="aqi">
+            <div class="graph-title">
+                AQI (USA)
+            </div>
+            <span id="display">48</span>
+
+            <div class="observation">
+                Moderate
+            </div>
+
+        </div>-->
+    
+        <div class="card-body">
+            <div class="row">
+              <div class="col-sm-5">
+                <h4 class="card-title mb-0">KigaliAir</h4>
+                <div class="small text-muted">May 2019</div>
+              </div>
+              <!-- /.col-->
+              <div class="col-sm-7 d-none d-md-block">
+                <button class="btn btn-primary float-right" type="button">
+                  <i class="icon-cloud-download"></i>
+                </button>
+                <div class="btn-group btn-group-toggle float-right mr-3" data-toggle="buttons">
+                  <label class="btn btn-outline-secondary">
+                    <input id="option1" type="radio" name="options" autocomplete="off"> Day
+                  </label>
+                  <label class="btn btn-outline-secondary active">
+                    <input id="option2" type="radio" name="options" autocomplete="off" checked=""> Month
+                  </label>
+                  <label class="btn btn-outline-secondary">
+                    <input id="option3" type="radio" name="options" autocomplete="off"> Year
+                  </label>
+                </div>
+              </div>
+              <!-- /.col-->
+            </div>
+            
+          </div>
+          <div class="card-footer">
+            <div class="row text-center">
+              <div class="col-sm-12 col-md mb-sm-2 mb-0">
+                <div class="text-muted">AQI (RWANDA)</div>
+                <strong th:text="${aqi}"></strong>
+                <div class="progress progress-xs mt-2">
+                  <div class="progress-bar bg-success" role="progressbar" style="width: 40%" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md mb-sm-2 mb-0">
+                <div class="text-muted">Temperature reading</div>
+                <strong th:text="${temp} + '°C'"></strong>
+                <div class="progress progress-xs mt-2">
+                  <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md mb-sm-2 mb-0">
+                <div class="text-muted">Current Humidity</div>
+                <strong th:text="${humidity} + '%'"></strong>
+                <div class="progress progress-xs mt-2">
+                  <div class="progress-bar bg-success" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md mb-sm-2 mb-0">
+                <div class="text-muted">Carbondioxide</div>
+                <strong th:text="${CO2} + ' μg/m³'"></strong>
+                <div class="progress progress-xs mt-2">
+                  <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="260" aria-valuemin="0" aria-valuemax="500"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>        
+
+
+
+
+
+        <div id="my-chart" width="200" height="200"></div>
         <p>
-            <a class="btn btn-sm btn-primary" href="#" role="button">About Us &raquo;</a>
-        </p>
-        <h5 th:text="'AQI(USA): ' + ${aqi}"></h5>
-        <h5 th:text="'Temperature (°C): ' + ${temp}"></h5>
-        <h5 th:text="'Humidity (g/m³ or %): ' + ${humidity}"></h5>
-        <h5 th:text="'Carbondioxide (CO₂): ' + ${CO2}"></h5>
-        <h5 th:text="'Particle Matter, PM2.5 (μg/m³): ' + ${PM25}"></h5>
-        <h5 th:text="'Created At: ' + ${createdAt}"></h5>
-        <h5 th:text="'Updated at: ' + ${updatedAt}"></h5>
-        <h5> Air Quality Index (AQI)</h5>
-        <div class="ct-chart" width="200" height="200"></div>
-        <p>
-            <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/778383/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+            <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/778383/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Air+Quality+Index&type=line"></iframe>
             <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/778383/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
         </p>
         <p>
             <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/778383/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
             <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/778383/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
         </p>
-        <p>
-            <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/778383/charts/5?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
-            <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/778383/charts/6?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
-        </p>
     </div>
-</div> <!-- /container -->
+</div>
+<!-- /container -->
 <!-- Bootstrap core JavaScript
-================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="../../../../src/js/range.js"></script>
 <script src="../static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="../static/js/custom.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
 <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
-<script>
-    new Chartist.Pie('.ct-chart', {
-    series: [20, 80]
-}, {
-    donut: true,
-    donutWidth: 20,
-    donutSolid: false,
-    startAngle: 270,
-    total: 200,
-    showLabel: true
-});
-</script>
+    <!--<script>
+
+        let createAt = [];
+        let field1 = [];
+        fetch('https://api.thingspeak.com/channels/778383/fields/1.json?results=20')
+            .then(response => response.json())
+        .then(data => {
+
+            data.feeds.forEach(list => {
+                createAt.push(list.created_at)
+                field1.push(list.field1)
+            })
+            console.log(createAt, field1);
+            var data = {
+                labels: createAt,
+                series: [
+                    {
+                        data: field1
+                    }
+                ]
+            };
+
+            /* Set some base options (settings will override the default settings in Chartist.js *see default settings*). We are adding a basic label interpolation function for the xAxis labels. */
+            var options = {
+                axisX: {
+                    labelInterpolationFnc: function(value) {
+                        return  value;
+                    }
+                }
+            };
+
+            /* Now we can specify multiple responsive settings that will override the base settings based on order and if the media queries match. In this example we are changing the visibility of dots and lines as well as use different label interpolations for space reasons. */
+            var responsiveOptions = [
+                ['screen and (min-width: 641px) and (max-width: 1024px)', {
+                    showPoint: false,
+                    axisX: {
+                        labelInterpolationFnc: function(value) {
+                            return 'Week ' + value;
+                        }
+                    }
+                }],
+                ['screen and (max-width: 640px)', {
+                    showLine: false,
+                    axisX: {
+                        labelInterpolationFnc: function(value) {
+                            return 'W' + value;
+                        }
+                    }
+                }]
+            ];
+
+            /* Initialize the chart with the above settings */
+            new Chartist.Line('#my-chart', data, options, responsiveOptions);
+            })
+        .catch(error => console.error(error));
+
+
+    </script>-->
 </body>
 </html>

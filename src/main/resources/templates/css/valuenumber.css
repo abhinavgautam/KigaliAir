@@ -1,0 +1,26 @@
+.graph-title {
+    font-size: 15%;
+    margin-bottom: 0;
+  }
+  
+  .observation {
+    font-size: 15%;
+    text-align: centered;
+    font-weight: 100;
+  }
+  
+  .aqi {
+    width:20%;
+    height: 150px;
+    border: 1px solid black;
+    margin-top: 3%;
+    margin-left: 10%;
+    margin-bottom: -7%;
+    color: black;
+    text-align: center;
+    font-weight: bolder;
+    padding: 2%;
+    padding-bottom: 5%;
+    font-size: 650%;
+  }
+  

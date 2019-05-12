@@ -1,0 +1,114 @@
+body {
+    background: white;
+}
+
+nav {
+    margin: 0;
+    margin-bottom: 0;
+    width: 100%;
+    height: 50px;
+    background-color: lightblue;
+}
+
+.img {
+    height: 40px;
+    width: 10%;
+    margin-top: 0.5%;
+}
+
+
+.about {
+    color: white;
+    float: left;
+    text-decoration: none;
+    
+}
+
+.history {
+    color: white;
+    float: left;
+    text-decoration: none;
+    
+
+}
+
+.search {
+    color: white;
+    float: left;
+    text-decoration: none;
+    
+}
+
+.contact {
+    color: white;
+    float: left;
+    text-decoration: none;
+    
+}
+
+
+.main-div {
+    margin: 0;
+    height: 950px;
+    width: 95%;
+    background-color: aliceblue;
+}
+
+.div1 {
+    border: 1px solid black;
+    margin-top: 5%;
+    margin-left: 25%;
+    width: 40%;
+    height: 300px;
+
+}
+
+.div2 {
+    border: 1px solid black;
+    margin-top: 5%;
+    margin-left: 25%;
+    height: 250px;
+    width: 250px;
+    float: left;
+    
+}
+
+.div3 {
+    border: 1px solid black;
+    margin-top: 5%;
+    margin-left: 25%;
+    height: 250px;
+    width: 250px;
+    float: left;
+    
+}
+
+.div4 {
+    border: 1px solid black;
+    margin-top: 5%;
+    margin-left: 25%;
+    height: 250px;
+    width: 250px;
+    float: left;
+    
+}
+
+.div5 {
+    border: 1px solid black;
+    margin-top: 5%;
+    margin-left: 25%;
+    height: 250px;
+    width: 250px;
+    float: left;
+    
+}
+
+#footer {
+
+    position: relative;
+    margin-bottom: 0px;
+    width: 100%;
+    height: 50px;
+    background-color: lightblue;
+    
+  }

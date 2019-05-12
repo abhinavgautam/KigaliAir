@@ -1,5 +1,6 @@
 package com.garage48.kigaliair.controller;
 
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
@@ -29,15 +30,28 @@ public class KigaliairController {
 
     @RequestMapping("/")
     public String index(Model model) throws IOException {
-        JSONObject json = readJsonFromUrl("https://api.thingspeak.com/channels/778383/fields/1.json?results=2");
+        JSONObject json = readJsonFromUrl("https://api.thingspeak.com/channels/778383/fields/1.json?results=1");
+        JSONArray jArr = json.getJSONArray("feeds");
+        String aqi  = (String) jArr.getJSONObject(0).get("field1");
+
+        json = readJsonFromUrl("https://api.thingspeak.com/channels/778383/fields/2.json?results=1");
+        jArr = json.getJSONArray("feeds");
+        String temp  = (String) jArr.getJSONObject(0).get("field2");
+
+        json = readJsonFromUrl("https://api.thingspeak.com/channels/778383/fields/3.json?results=1");
+        jArr = json.getJSONArray("feeds");
+        String humidity  = (String) jArr.getJSONObject(0).get("field3");
+
+        json = readJsonFromUrl("https://api.thingspeak.com/channels/778383/fields/4.json?results=1");
+        jArr = json.getJSONArray("feeds");
+        String co2  = (String) jArr.getJSONObject(0).get("field4");
 
         // System.out.println("Blah Blah " + json.toString());
         // System.out.println(json.get("field1"));
-        model.addAttribute("aqi", json.getJSONObject("channel").get("field1"));
-        model.addAttribute("temp", json.getJSONObject("channel").get("field2"));
-        model.addAttribute("humidity", json.getJSONObject("channel").get("field3"));
-        model.addAttribute("CO2", json.getJSONObject("channel").get("field4"));
-        model.addAttribute("PM25", json.getJSONObject("channel").get("field5"));
+        model.addAttribute("aqi", aqi);
+        model.addAttribute("temp", temp);
+        model.addAttribute("humidity", humidity);
+        model.addAttribute("CO2", co2);
         model.addAttribute("createdAt", json.getJSONObject("channel").get("created_at"));
         model.addAttribute("updatedAt", json.getJSONObject("channel").get("updated_at"));
 
