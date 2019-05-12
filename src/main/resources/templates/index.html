@@ -85,14 +85,14 @@
                 <div class="text-muted">Current Humidity</div>
                 <strong id="humidity-text"></strong>
                 <div class="progress progress-xs mt-2">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="progress-bar bg-success" role="progressbar" style="width: 60%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div>
               <div class="col-sm-12 col-md mb-sm-2 mb-0">
                 <div class="text-muted">Carbondioxide</div>
                 <strong id="co2-text"></strong>
                 <div class="progress progress-xs mt-2">
-                  <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="260" aria-valuemin="0" aria-valuemax="500"></div>
+                  <div class="progress-bar bg-info" role="progressbar" style="width: 35%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div>
             </div>
@@ -143,14 +143,14 @@
     .then(data => {
         temp = data.feeds[0].field2
         const tempElement = document.getElementById('temp-text');
-        tempElement.innerText = temp + '°C';
+        tempElement.innerText = temp + ' °C';
     })
     fetch('https://api.thingspeak.com/channels/778383/fields/3.json?results=1')
         .then(data  => data.json())
     .then(data => {
         humidity = data.feeds[0].field3
         const humidityElement = document.getElementById('humidity-text');
-    humidityElement.innerText = humidity + '%';
+    humidityElement.innerText = humidity + ' %';
     })
     fetch('https://api.thingspeak.com/channels/778383/fields/4.json?results=1')
         .then(data  => data.json())
